@@ -1,3 +1,7 @@
+/** Doubly linked list based Double Ended Queue
+ * @author  Cong Chen
+ * @param <GType>
+ */
 public class LinkedListDeque<GType> {
     private class OneNode {
         public OneNode prev; //sentinel's forward link always points to the last element
