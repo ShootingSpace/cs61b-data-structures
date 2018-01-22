@@ -56,11 +56,10 @@ public class LinkedListDeque<GType> {
 
     /** Returns true if deque is empty, false otherwise. */
     public boolean isEmpty(){
-        boolean empty = true;
         if (size>0){
-            empty = false;
+            return false;
         }
-        return empty;
+        return true;
     }
 
     /** Returns the number of items in the list. */
