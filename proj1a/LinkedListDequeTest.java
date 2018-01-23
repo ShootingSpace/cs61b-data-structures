@@ -87,7 +87,7 @@ public class LinkedListDequeTest {
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
 	public static void addRemoveLastTest() {
 
-		System.out.println("Running add/remove test.");
+		System.out.println("Running removeLast test.");
 
 		//System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 		//*
@@ -95,7 +95,9 @@ public class LinkedListDequeTest {
 		// should be empty
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
-		lld1.addFirst(10);
+		for (int i=0;i<20;i++){
+			lld1.addLast(i);
+		}
 		// should not be empty
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
