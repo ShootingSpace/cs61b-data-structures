@@ -34,9 +34,14 @@ public class ArrayDeque<GType> {
      * */
     private void resize(int capacity) {
         GType[] newContainer = (GType[]) new Object[capacity];
-        int firstChunk = items.length - head;
-        System.arraycopy(items, head, newContainer, 0, firstChunk);
-        System.arraycopy(items, 0, newContainer, firstChunk, size - firstChunk);
+        if (head > tail){
+            int firstChunk = items.length - head;
+            System.arraycopy(items, head, newContainer, 0, firstChunk);
+            System.arraycopy(items, 0, newContainer, firstChunk, size - firstChunk);
+        } else{
+            System.arraycopy(items, head, newContainer, 0, size);
+        }
+
         items = newContainer;
         head = 0;
         tail = size -1;
