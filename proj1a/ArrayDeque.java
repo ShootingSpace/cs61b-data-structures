@@ -53,9 +53,17 @@ public class ArrayDeque<GType> {
             resize(size * RFACTOR);
         }
 
-        int insert = (head - 1 + items.length) % items.length;
-        items[insert] = x;
-        head = insert;
+        if (isEmpty()){
+            /** for empty array, just dial the head and tail back to the initial position */
+            head = 0;
+            items[head] = x;
+            tail = 0;
+        } else {
+            int insert = (head - 1 + items.length) % items.length;
+            items[insert] = x;
+            head = insert;
+        }
+
         size += 1;
     }
 
@@ -65,9 +73,17 @@ public class ArrayDeque<GType> {
             resize(size * RFACTOR);
         }
 
-        int insert = (tail + 1)% items.length;
-        items[insert] = x;
-        tail = insert;
+        if (isEmpty()){
+            /** for empty array, just dial the head and tail back to the initial position */
+            head =0;
+            items[head] = x;
+            tail = 0;
+        } else{
+            int insert = (tail + 1)% items.length;
+            items[insert] = x;
+            tail = insert;
+        }
+
         size += 1;
     }
 
