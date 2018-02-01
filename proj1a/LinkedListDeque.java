@@ -129,14 +129,14 @@ public class LinkedListDeque<GType> {
         }
 
         OneNode P = sentinel;
-        return getRecursiveHelper(index, P.next);
+        return getRecursive(index, P.next);
     }
 
-    public GType getRecursiveHelper(int index, OneNode P){
+    public GType getRecursive(int index, OneNode P){
         if (index==0){
             return P.item;
         }
-        return getRecursiveHelper(index-1, P.next);
+        return getRecursive(index-1, P.next);
     }
 
 }

@@ -101,6 +101,12 @@ public class ArrayDequeTest {
         // should not be empty
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
+        int index = 3;
+        System.out.println("Check the get method: for index of "+index+", should return "+(index));
+        System.out.println("       Get: "+lld1.get(index));
+        System.out.println("Check Non-destructive: ");
+        lld1.printDeque();
+
         lld1.addLast(101);
         // should not be empty
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
@@ -109,7 +115,7 @@ public class ArrayDequeTest {
         // should not be empty
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
-        System.out.println("Printing out deque: ");
+        System.out.println("\nPrinting out deque: ");
         lld1.printDeque();
 
         printTestStatus(passed);

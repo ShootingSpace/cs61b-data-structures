@@ -101,6 +101,10 @@ public class LinkedListDequeTest {
 		// should not be empty
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
+		int index = 3;
+
+		System.out.println("Check the get method: for index of "+index+", should return "+(index));
+		System.out.println("       Get: "+lld1.get(index)+". Get recursive: "+lld1.getRecursive(index));
 		lld1.addLast(101);
 		// should not be empty
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
