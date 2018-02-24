@@ -20,23 +20,29 @@ public class TestPalindrome {
     public void testisPalindrome(){
         String t0 = "";
         String t1 = "a";
-        String t2 = "racecar";
-        String t3 = "noon";
+        String t2 = "rr";
+        String t3 = "no on";
+        String t4 = "racecar";
+        String t5 = "123321";
 
         String f0 = "Aa";
         String f1 = "rancor";
         String f2 = "aaaaab";
         String f3 = "horse";
+        String f4 = "racecar ";
 
         assertTrue(palindrome.isPalindrome(t0));
         assertTrue(palindrome.isPalindrome(t1));
         assertTrue(palindrome.isPalindrome(t2));
         assertTrue(palindrome.isPalindrome(t3));
+        assertTrue(palindrome.isPalindrome(t4));
+        assertTrue(palindrome.isPalindrome(t5));
 
         assertFalse(palindrome.isPalindrome(f0));
         assertFalse(palindrome.isPalindrome(f1));
         assertFalse(palindrome.isPalindrome(f2));
         assertFalse(palindrome.isPalindrome(f3));
+        assertFalse(palindrome.isPalindrome(f4));
 
     }
 }
