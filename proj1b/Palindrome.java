@@ -1,5 +1,6 @@
-import java.util.Queue;
-
+/** Implementation of Project 1b of cs61b
+ * @author Cong Chen
+ */
 public class Palindrome {
     /** Input: a String,
      *  Return: a Deque, where the characters appear in the same order as in the String.
@@ -37,6 +38,25 @@ public class Palindrome {
             }
             return false;
         }
+    }
+
+    /** Return true if the word is a palindrome according to the character comparison test
+     * provided by the CharacterComparator passed in as argument cc
+     * @param word
+     * @param cc
+     * @return
+     */
+    public boolean isPalindrome(String word, CharacterComparator cc){
+        int i1 = 0;
+        int i2 = word.length() - 1;
+        while (i2 > i1) {
+            if ( !cc.equalChars( word.charAt(i1), word.charAt(i2)) ) {
+                return false;
+            }
+            ++i1;
+            --i2;
+        }
+        return true;
     }
 
 }

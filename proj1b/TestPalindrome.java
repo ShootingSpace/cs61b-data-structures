@@ -1,6 +1,9 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/** Implementation of Project 1b of cs61b
+ * @author Cong Chen
+ */
 public class TestPalindrome {
     /** You must use this palindrome, and not instantiate
     // new Palindromes, or the autograder might be upset.*/
@@ -43,6 +46,29 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome(f2));
         assertFalse(palindrome.isPalindrome(f3));
         assertFalse(palindrome.isPalindrome(f4));
+
+    }
+
+    @Test
+    public void testisPalindromeOffByOne(){
+        CharacterComparator offByOne = new OffByOne();
+
+        String f2 = "rr";
+        String f3 = "no on";
+        String f4 = "racecar";
+        String f5 = "123321";
+
+        String t0 = "";
+        String t1 = "a";
+        String t2 = "flake";
+
+        assertTrue(palindrome.isPalindrome(t0, offByOne));
+        assertTrue(palindrome.isPalindrome(t1, offByOne));
+        assertTrue(palindrome.isPalindrome(t2, offByOne));
+
+        assertFalse(palindrome.isPalindrome(f2, offByOne));
+        assertFalse(palindrome.isPalindrome(f3, offByOne));
+        assertFalse(palindrome.isPalindrome(f4, offByOne));
 
     }
 }
