@@ -16,7 +16,5 @@ public class StudentArrayDequeLauncher {
         }
 
         sad1.printDeque();
-        /* Helpful challenge: Modify this file so that it outputs the list of
-           operations as a String. Use the OperationSequence class. */
     }
 } 

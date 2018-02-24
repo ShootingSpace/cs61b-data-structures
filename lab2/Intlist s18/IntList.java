@@ -119,30 +119,6 @@ public class IntList {
         return new IntList(A.first, catenateRecursive(A.rest, B));
     }
 
-    /**
-     * Returns the reverse of the given IntList.
-     * This method is destructive. If given null
-     * as an input, returns null.
-     */
-    public static IntList reverse(IntList origin){
-        if (origin == null || origin.rest == null){
-            return origin;
-        }
-        IntList frontOfReversed = null;
-        IntList nextNodeToAdd = origin;
-        while (nextNodeToAdd != null) {
-            IntList remainderOfOriginal = nextNodeToAdd.rest;
-            nextNodeToAdd.rest = frontOfReversed;
-            frontOfReversed = nextNodeToAdd;
-            nextNodeToAdd = remainderOfOriginal;
-            }
-
-        return frontOfReversed;
-
-
-    }
-
-
 
 
 
