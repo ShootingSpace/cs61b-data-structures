@@ -12,8 +12,8 @@
 public class ArrayDeque<T> {
     private static final int RFACTOR = 2; // 扩容 factor
     private static final double USAGE = 0.25; // usage factor
-    private static final int miniCheckCapacity = 16;
-    private static final int initCapacity = 8;
+    private static final int MINI_CHECK_CAPACITY = 16;
+    private static final int INIT_CAPACITY = 8;
     private T[] items;
     private int head; // mark the head index of array
     private int tail; // mark the tail index of array
@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
     /** 构造一个初始容量 8 的数组，初始有效数据成员为0,
      * when head == tail, the array is empty */
     public ArrayDeque() {
-        items = (T[]) new Object[initCapacity];
+        items = (T[]) new Object[INIT_CAPACITY];
         size = 0;
         head = 0;
         tail = 0;
@@ -53,7 +53,7 @@ public class ArrayDeque<T> {
     /** Check if usage rate is low. */
     private boolean isLowUsage() {
         double rate = (double) size / items.length;
-        return items.length >= miniCheckCapacity && rate < USAGE;
+        return items.length >= MINI_CHECK_CAPACITY && rate < USAGE;
     }
 
     /** Adds an item to the front of the Deque. */
