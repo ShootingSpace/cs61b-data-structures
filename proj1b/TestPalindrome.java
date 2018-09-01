@@ -20,7 +20,7 @@ public class TestPalindrome {
     } // Uncomment this class once you've created your Palindrome class.
 
     @Test
-    public void testisPalindrome(){
+    public void testisPalindrome() {
         String t0 = "";
         String t1 = "a";
         String t2 = "rr";
@@ -50,7 +50,7 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testisPalindromeOffByOne(){
+    public void testisPalindromeOffByOne() {
         CharacterComparator offByOne = new OffByOne();
 
         String f2 = "rr";

@@ -1,9 +1,8 @@
-import java.util.Comparator;
 
 public class OffByN implements CharacterComparator {
-    private int N;
-    public OffByN(int N) {
-        this.N = N;
+    private int n;
+    public OffByN(int n) {
+        this.n = n;
     }
 
     /** returns true for characters that are off by N.
@@ -17,6 +16,6 @@ public class OffByN implements CharacterComparator {
      */
     @Override
     public boolean equalChars(char x, char y) {
-        return ( Math.abs(x-y) == this.N);
+        return (Math.abs(x - y) == this.n);
     }
 }

@@ -35,8 +35,6 @@ public class ArrayDequeTest {
      * && is the "and" operation. */
     public static void addIsEmptySizeTest() {
         System.out.println("Running add/isEmpty/Size test.");
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        //*
         ArrayDeque<String> lld1 = new ArrayDeque<String>();
 
         boolean passed = checkEmpty(true, lld1.isEmpty());
@@ -66,8 +64,6 @@ public class ArrayDequeTest {
 
         System.out.println("Running add/remove test.");
 
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        //*
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
         // should be empty
         boolean passed = checkEmpty(true, lld1.isEmpty());
@@ -85,25 +81,24 @@ public class ArrayDequeTest {
     }
 
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
-    public static void RemoveLastResizeTest() {
+    public static void removeLastResizeTest() {
 
         System.out.println("Running remove/resize test.");
 
-        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        //*
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
         // should be empty
         boolean passed = checkEmpty(true, lld1.isEmpty());
 
-        for (int i=0;i<20;i++){
+        for (int i = 0; i < 20; i++) {
             lld1.addLast(i);
         }
         // should not be empty
         passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
         int index = 3;
-        System.out.println("Check the get method: for index of "+index+", should return "+(index));
-        System.out.println("       Get: "+lld1.get(index));
+        System.out.println("Check the get method: for index of "
+                + index + ", should return " + (index));
+        System.out.println("       Get: " + lld1.get(index));
         System.out.println("Check Non-destructive: ");
         lld1.printDeque();
 
@@ -125,6 +120,6 @@ public class ArrayDequeTest {
         System.out.println("Running tests.\n");
         addIsEmptySizeTest();
         addRemoveTest();
-        RemoveLastResizeTest();
+        removeLastResizeTest();
     }
 }

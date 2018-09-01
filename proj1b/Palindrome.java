@@ -10,7 +10,7 @@ public class Palindrome {
      * @param word
      * @return
      */
-    public Deque<Character> wordToDeque(String word){
+    public Deque<Character> wordToDeque(String word) {
         Deque<Character> ary = new LinkedListDeque<>();
         for (int i = 0; i < word.length(); i++) {
             ary.addLast(word.charAt(i));
@@ -24,16 +24,16 @@ public class Palindrome {
      * @param word
      * @return
      */
-    public boolean isPalindrome(String word){
+    public boolean isPalindrome(String word) {
         Deque wordQ = wordToDeque(word);
         return isPalindromeHelper(wordQ);
     }
 
-    public boolean isPalindromeHelper(Deque wordQ){
-        if (wordQ.size() < 2){
+    public boolean isPalindromeHelper(Deque wordQ) {
+        if (wordQ.size() < 2) {
             return true;
         } else {
-            if (wordQ.removeFirst() == wordQ.removeLast()){
+            if (wordQ.removeFirst() == wordQ.removeLast()) {
                 return isPalindromeHelper(wordQ);
             }
             return false;
@@ -46,11 +46,11 @@ public class Palindrome {
      * @param cc
      * @return
      */
-    public boolean isPalindrome(String word, CharacterComparator cc){
+    public boolean isPalindrome(String word, CharacterComparator cc) {
         int i1 = 0;
         int i2 = word.length() - 1;
         while (i2 > i1) {
-            if ( !cc.equalChars( word.charAt(i1), word.charAt(i2)) ) {
+            if (!cc.equalChars(word.charAt(i1), word.charAt(i2))) {
                 return false;
             }
             ++i1;

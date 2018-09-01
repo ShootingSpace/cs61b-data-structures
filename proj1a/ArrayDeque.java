@@ -10,12 +10,12 @@
  */
 
 public class ArrayDeque<GType> {
+    private static final int RFACTOR = 2; // 扩容 factor
+    private static final double USAGE = 0.25; // usage factor
     private GType[] items;
     private int head; // mark the head index of array
     private int tail; // mark the tail index of array
     private int size;
-    private int RFACTOR = 2; // 扩容 factor
-    private double USAGE = 0.25; // usage factor
 
     /** 构造一个初始容量 8 的数组，初始有效数据成员为0,
      * when head == tail, the array is empty */
@@ -34,31 +34,31 @@ public class ArrayDeque<GType> {
      * */
     private void resize(int capacity) {
         GType[] newContainer = (GType[]) new Object[capacity];
-        if (head > tail){
+        if (head > tail) {
             int firstChunk = items.length - head;
             System.arraycopy(items, head, newContainer, 0, firstChunk);
             System.arraycopy(items, 0, newContainer, firstChunk, size - firstChunk);
-        } else{
+        } else {
             System.arraycopy(items, head, newContainer, 0, size);
         }
 
         items = newContainer;
         head = 0;
-        tail = size -1;
+        tail = size - 1;
     }
 
     /** Return the usage rate */
-    public double checkUsage(){
+    public double checkUsage() {
         return size / items.length;
     }
 
     /** Adds an item to the front of the Deque. */
-    public void addFirst(GType x){
+    public void addFirst(GType x) {
         if (size == items.length) {
             resize(size * RFACTOR);
         }
 
-        if (isEmpty()){
+        if (isEmpty()) {
             /** for empty array, just dial the head and tail back to the initial position */
             head = 0;
             items[head] = x;
@@ -73,18 +73,18 @@ public class ArrayDeque<GType> {
     }
 
     /** Adds an item to the back of the Deque. */
-    public void addLast(GType x){
+    public void addLast(GType x) {
         if (size == items.length) {
             resize(size * RFACTOR);
         }
 
-        if (isEmpty()){
+        if (isEmpty()) {
             /** for empty array, just dial the head and tail back to the initial position */
-            head =0;
+            head = 0;
             items[head] = x;
             tail = 0;
-        } else{
-            int insert = (tail + 1)% items.length;
+        } else {
+            int insert = (tail + 1) % items.length;
             items[insert] = x;
             tail = insert;
         }
@@ -93,8 +93,8 @@ public class ArrayDeque<GType> {
     }
 
     /** Returns true if deque is empty, false otherwise. */
-    public boolean isEmpty(){
-        if (size>0){
+    public boolean isEmpty() {
+        if (size > 0) {
             return false;
         }
         return true;
@@ -106,17 +106,17 @@ public class ArrayDeque<GType> {
     }
 
     /** Prints the items in the Deque from first to last, separated by a space */
-    public void printDeque(){
-        for (int i = 0; i<size; i++){
-            System.out.print(items[ (i + head)% items.length]);
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(items[ (i + head) % items.length]);
             System.out.print(" ");
         }
     }
 
     /** Removes and returns the item at the front of the Deque.
      * If no such item exists, returns null.O(c). */
-    public GType removeFirst(){
-        if (isEmpty()){
+    public GType removeFirst() {
+        if (isEmpty()) {
             return null;
         }
 
@@ -125,7 +125,7 @@ public class ArrayDeque<GType> {
         head = (head + 1) % items.length;
         size -= 1;
 
-        if (size >= 16 && checkUsage() < USAGE){
+        if (size >= 16 && checkUsage() < USAGE) {
             resize(size * RFACTOR);
         }
 
@@ -134,8 +134,8 @@ public class ArrayDeque<GType> {
 
     /** Removes and returns the item at the back of the Deque.
      * If no such item exists, returns null. O(1) */
-    public GType removeLast(){
-        if (isEmpty()){
+    public GType removeLast() {
+        if (isEmpty()) {
             return null;
         }
 
@@ -144,7 +144,7 @@ public class ArrayDeque<GType> {
         tail = (tail - 1 + items.length) % items.length;
         size -= 1;
 
-        if (size >= 16 && checkUsage() < USAGE ){
+        if (size >= 16 && checkUsage() < USAGE) {
             resize(size * RFACTOR);
         }
 
@@ -154,12 +154,12 @@ public class ArrayDeque<GType> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
      * Use iteration.  */
-    public GType get(int index){
-        if (index > size-1){
+    public GType get(int index) {
+        if (index > size - 1) {
             return null;
         }
 
-        return items[(index + head)%items.length];
+        return items[(index + head) % items.length];
     }
 
 }
