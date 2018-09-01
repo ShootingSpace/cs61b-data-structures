@@ -86,11 +86,11 @@ public class IntListTest {
      That the method handles a null input properly.
      */
     @Test
-    public void testReverse(){
-        IntList A = IntList.of(1, 2, 3,4);
+    public void testReverse() {
+        IntList A = IntList.of(1, 2, 3, 4);
         IntList x = IntList.reverse(A);
-        assertNotEquals(IntList.of(1, 2, 3,4), A);
-        assertEquals(IntList.of(4,3, 2, 1), x);
+        assertNotEquals(IntList.of(1, 2, 3, 4), A);
+        assertEquals(IntList.of(4, 3, 2, 1), x);
         IntList.reverse(null);
     }
 
