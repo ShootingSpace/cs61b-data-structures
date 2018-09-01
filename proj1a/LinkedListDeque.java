@@ -1,14 +1,14 @@
 /** Doubly linked list based Double Ended Queue
  * @author  Cong Chen
- * @param <GType>
+ * @param <T>
  */
-public class LinkedListDeque<GType> {
+public class LinkedListDeque<T> {
     private class OneNode {
         private OneNode prev; // sentinel's forward link always points to the last element
-        private GType item;
+        private T item;
         private OneNode next; // sentinel's backward link always points to the first element
 
-        OneNode(OneNode p, GType i, OneNode n) {
+        OneNode(OneNode p, T i, OneNode n) {
             prev = p;
             item = i;
             next = n;
@@ -27,7 +27,7 @@ public class LinkedListDeque<GType> {
     }
 
     /** Creates a deque with x  */
-    public LinkedListDeque(GType x) {
+    private LinkedListDeque(T x) {
         sentinel = new OneNode(null, null, null);
         sentinel.next = new OneNode(sentinel, x, sentinel);
         sentinel.prev = sentinel.next;
@@ -36,7 +36,7 @@ public class LinkedListDeque<GType> {
 
     /** Adds an item to the front of the Deque.
      *  O(c)  */
-    public void addFirst(GType x) {
+    public void addFirst(T x) {
         OneNode oldFrontNode = sentinel.next;
         OneNode newNode = new OneNode(sentinel, x, oldFrontNode);
         sentinel.next = newNode;
@@ -46,7 +46,7 @@ public class LinkedListDeque<GType> {
 
     /** Adds an item to the back of the Deque.
      * O(c) */
-    public void addLast(GType x) {
+    public void addLast(T x) {
         OneNode oldBackNode = sentinel.prev;
         OneNode newNode = new OneNode(oldBackNode, x, sentinel);
         sentinel.prev = newNode;
@@ -79,7 +79,7 @@ public class LinkedListDeque<GType> {
 
     /** Removes and returns the item at the front of the Deque.
      * If no such item exists, returns null.O(c). */
-    public GType removeFirst() {
+    public T removeFirst() {
         if (isEmpty()) {
             return null;
         }
@@ -93,7 +93,7 @@ public class LinkedListDeque<GType> {
 
     /** Removes and returns the item at the back of the Deque.
      * If no such item exists, returns null. O(1) */
-    public GType removeLast() {
+    public T removeLast() {
         if (isEmpty()) {
             return null;
         }
@@ -108,7 +108,7 @@ public class LinkedListDeque<GType> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
      * Use iteration.  */
-    public GType get(int index) {
+    public T get(int index) {
         if (index > size - 1) {
             return null;
         }
@@ -123,7 +123,7 @@ public class LinkedListDeque<GType> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
     * If no such item exists, returns null. Must not alter the deque!
     * Use recursion. */
-    public GType getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index > size - 1) {
             return null;
         }
@@ -132,7 +132,7 @@ public class LinkedListDeque<GType> {
         return getRecursive(index, p.next);
     }
 
-    public GType getRecursive(int index, OneNode p) {
+    private T getRecursive(int index, OneNode p) {
         if (index == 0) {
             return p.item;
         }
