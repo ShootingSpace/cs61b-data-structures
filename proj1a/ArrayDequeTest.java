@@ -113,6 +113,18 @@ public class ArrayDequeTest {
         System.out.println("\nPrinting out deque: ");
         lld1.printDeque();
 
+        // test memory released
+        ArrayDeque<Integer> lld2 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 64; i++) {
+            lld2.addLast(i);
+        }
+
+        for (int i = 0; i < 64 - 1; i++) {
+            lld2.removeFirst();
+        }
+
+        lld2.removeFirst();
+
         printTestStatus(passed);
         //*/
     }

@@ -1,6 +1,6 @@
 /** Array based Double Ended Queue.
  *  @author Cong Chen
- *  @param <GType>
+ *  @param <T>
  *  1. Treat array as circular: if front pointer is at position zero,
  *      addFirst: the front pointer should loop back around to the end of the array,
  *      so the new front item in the deque will be the last item in the underlying array.
@@ -9,10 +9,12 @@
  *  4. For arrays of length 16 or more, your usage factor should always be at least 25%.
  */
 
-public class ArrayDeque<GType> {
+public class ArrayDeque<T> {
     private static final int RFACTOR = 2; // 扩容 factor
     private static final double USAGE = 0.25; // usage factor
-    private GType[] items;
+    private static final int miniCheckCapacity = 16;
+    private static final int initCapacity = 8;
+    private T[] items;
     private int head; // mark the head index of array
     private int tail; // mark the tail index of array
     private int size;
@@ -20,24 +22,25 @@ public class ArrayDeque<GType> {
     /** 构造一个初始容量 8 的数组，初始有效数据成员为0,
      * when head == tail, the array is empty */
     public ArrayDeque() {
-        items = (GType[]) new Object[8];
+        items = (T[]) new Object[initCapacity];
         size = 0;
         head = 0;
         tail = 0;
     }
 
     /** 改变列表容量, capacity为改变后的容量.
-     * 1. Copy the [nominated head - real head] part: the firstChunk,
+     * For case where head index is larger than tail:
+     * 1. First Copy the [head - conatainer bottom] part: the headToBottom chunk,
      *      and position it at the beginning of the new container
      * 2. Copy the rest [real head - nominated tail] part, following the above part.
      * 3. Modify the head and tail.
      * */
     private void resize(int capacity) {
-        GType[] newContainer = (GType[]) new Object[capacity];
+        T[] newContainer = (T[]) new Object[capacity];
         if (head > tail) {
-            int firstChunk = items.length - head;
-            System.arraycopy(items, head, newContainer, 0, firstChunk);
-            System.arraycopy(items, 0, newContainer, firstChunk, size - firstChunk);
+            int headToBottom = items.length - head;
+            System.arraycopy(items, head, newContainer, 0, headToBottom);
+            System.arraycopy(items, 0, newContainer, headToBottom, size - headToBottom);
         } else {
             System.arraycopy(items, head, newContainer, 0, size);
         }
@@ -47,13 +50,14 @@ public class ArrayDeque<GType> {
         tail = size - 1;
     }
 
-    /** Return the usage rate */
-    public double checkUsage() {
-        return size / items.length;
+    /** Check if usage rate is low. */
+    private boolean isLowUsage() {
+        double rate = (double) size / items.length;
+        return items.length >= miniCheckCapacity && rate < USAGE;
     }
 
     /** Adds an item to the front of the Deque. */
-    public void addFirst(GType x) {
+    public void addFirst(T x) {
         if (size == items.length) {
             resize(size * RFACTOR);
         }
@@ -73,7 +77,7 @@ public class ArrayDeque<GType> {
     }
 
     /** Adds an item to the back of the Deque. */
-    public void addLast(GType x) {
+    public void addLast(T x) {
         if (size == items.length) {
             resize(size * RFACTOR);
         }
@@ -94,10 +98,7 @@ public class ArrayDeque<GType> {
 
     /** Returns true if deque is empty, false otherwise. */
     public boolean isEmpty() {
-        if (size > 0) {
-            return false;
-        }
-        return true;
+        return size == 0;
     }
 
     /** Returns the number of items in the list. */
@@ -115,18 +116,18 @@ public class ArrayDeque<GType> {
 
     /** Removes and returns the item at the front of the Deque.
      * If no such item exists, returns null.O(c). */
-    public GType removeFirst() {
+    public T removeFirst() {
         if (isEmpty()) {
             return null;
         }
 
-        GType save = items[head];
+        T save = items[head];
         items[head] = null;
         head = (head + 1) % items.length;
         size -= 1;
 
-        if (size >= 16 && checkUsage() < USAGE) {
-            resize(size * RFACTOR);
+        if (isLowUsage()) {
+            resize(items.length / RFACTOR);
         }
 
         return save;
@@ -134,18 +135,18 @@ public class ArrayDeque<GType> {
 
     /** Removes and returns the item at the back of the Deque.
      * If no such item exists, returns null. O(1) */
-    public GType removeLast() {
+    public T removeLast() {
         if (isEmpty()) {
             return null;
         }
 
-        GType save = items[tail];
+        T save = items[tail];
         items[tail] = null;
         tail = (tail - 1 + items.length) % items.length;
         size -= 1;
 
-        if (size >= 16 && checkUsage() < USAGE) {
-            resize(size * RFACTOR);
+        if (isLowUsage()) {
+            resize(items.length / RFACTOR);
         }
 
         return save;
@@ -154,7 +155,7 @@ public class ArrayDeque<GType> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque!
      * Use iteration.  */
-    public GType get(int index) {
+    public T get(int index) {
         if (index > size - 1) {
             return null;
         }
